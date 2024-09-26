@@ -1,6 +1,8 @@
 package main.java;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class VideogamesLibrary {
     private Set<Videogame> videogames;
@@ -63,5 +65,17 @@ public class VideogamesLibrary {
         dummyVideogame.setSpecificContentPEGI("Dummy content");
         dummyVideogame.setRequirements("Dummy requirements");
         videogames.add(dummyVideogame);
+    }
+
+    public List<Videogame> searchByGenre(String genre) {
+        return videogames.stream()
+                .filter(v -> v.getGenre().equalsIgnoreCase(genre))
+                .collect(Collectors.toList());
+    }
+
+    public List<Videogame> searchByPriceRange(float minPrice, float maxPrice) {
+        return videogames.stream()
+                .filter(v -> v.getPrice() >= minPrice && v.getPrice() <= maxPrice)
+                .collect(Collectors.toList());
     }
 }

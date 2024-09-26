@@ -1,6 +1,8 @@
 package main.java;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Videogame {
     private String name;
@@ -14,6 +16,7 @@ public class Videogame {
     private String requirements;
 
     private Set<User> usersWhoHaveConsulted;
+    private List<Review> reviews;
 
     public Set<User> getUsersWhoHaveConsulted() {
         return usersWhoHaveConsulted;
@@ -22,6 +25,7 @@ public class Videogame {
     public Videogame(String name) {
         this.name = name;
         usersWhoHaveConsulted = new HashSet<>();
+        reviews = new ArrayList<>();
     }
 
     public String getName() {
@@ -109,9 +113,26 @@ public class Videogame {
         System.out.println("* REQUIREMENTS:\n" + this.getRequirements());
         System.out.println();
         System.out.println();
+        System.out.println("* AVERAGE RATING: " + getAverageRating());
+        System.out.println("* REVIEWS: ");
+        for (Review review : reviews) {
+            System.out.println("  - " + review.getComment() + " (Rating: " + review.getRating() + ")");
+        }
     }
 
     public void addUsersWhoHaveConsulted(User user) {
         usersWhoHaveConsulted.add(user);
+    }
+
+    public void addReview(Review review) {
+        reviews.add(review);
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public double getAverageRating() {
+        return reviews.stream().mapToInt(Review::getRating).average().orElse(0);
     }
 }

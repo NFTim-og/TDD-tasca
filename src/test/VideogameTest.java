@@ -1,5 +1,6 @@
 import main.java.Videogame;
 import main.java.User;
+import main.java.Review;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -79,5 +80,25 @@ class VideogameTest {
         assertTrue(videogame.getUsersWhoHaveConsulted().contains(user1));
         assertTrue(videogame.getUsersWhoHaveConsulted().contains(user2));
         assertEquals(2, videogame.getUsersWhoHaveConsulted().size());
+    }
+
+    @Test
+    void testAddReview() {
+        Review review = new Review("User1", "Great game!", 5);
+        videogame.addReview(review);
+        assertEquals(1, videogame.getReviews().size());
+        assertEquals("Great game!", videogame.getReviews().get(0).getComment());
+    }
+
+    @Test
+    void testAverageRating() {
+        videogame.addReview(new Review("User1", "Great game!", 5));
+        videogame.addReview(new Review("User2", "Not bad", 3));
+        assertEquals(4.0, videogame.getAverageRating(), 0.01);
+    }
+
+    @Test
+    void testNoReviewsAverageRating() {
+        assertEquals(0.0, videogame.getAverageRating(), 0.01);
     }
 }

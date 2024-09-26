@@ -25,13 +25,11 @@ class MainTest {
 
         Main.main(new String[]{});
 
-        // Restore System.out
         System.setOut(originalOut);
 
-        // Check output
         String output = outputStream.toString();
-        assertTrue(output.contains("** USERS WHO HAVE CONSULTED")); // Check for specific output
-        assertTrue(output.contains("Joan")); // Check for expected username
+        assertTrue(output.contains("** USERS WHO HAVE CONSULTED"));
+        assertTrue(output.contains("Joan"));
         assertTrue(output.contains("Josep"));
     }
 

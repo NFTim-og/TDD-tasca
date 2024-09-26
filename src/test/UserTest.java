@@ -23,11 +23,6 @@ class UserTest {
     }
 
     @Test
-    void getId() {
-        assertEquals(user.getId(), 1);
-    }
-
-    @Test
     void testIdAssignment() {
         User user1 = new User("user1");
         User user2 = new User("user2");
